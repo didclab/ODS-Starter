@@ -10,7 +10,7 @@ the protocols we support as well as the limitations & enhancements we apply per 
 If you have any feature requests, questions, or concerns please feel free to open an issue in this repository, and we
 will answer promptly. Cheers
 
-## Relevant Repositories
+## The OneDataShare Repositories
 
 1. [ODS CLI](https://github.com/didclab/ods-cli) <sub>(Release)</sub>
 2. [Pmeter](https://github.com/didclab/pmeter) <sub>(Release)</sub>
@@ -22,7 +22,7 @@ will answer promptly. Cheers
 8. [OneDataShare Monolith](https://github.com/didclab/onedatashare)
 9. [ODS Scheduler](https://github.com/didclab/transfer-scheduler)
 
-## Important Protocol Limitations
+## Supported Protocols
 
 - [S3](https://www.researchgate.net/publication/335608365_Amazon_S3) <sub>(Release)</sub>
 - [FTP](https://www.rfc-editor.org/info/rfc959) <sub>(Release)</sub>
@@ -91,7 +91,7 @@ This section will explain the verbiage of the transfer options, and some recomme
 - Optimization: We are currently developing the Optimization side of the project, right now we plan to add two kinds:
   RL, and Bayesian Optimization.
 
-Currently, ODS uses [t2.micro](https://aws.amazon.com/ec2/instance-types/)
+Currently, ODS uses [t2.medium](https://aws.amazon.com/ec2/instance-types/)
 and [C4](https://aws.amazon.com/ec2/instance-types/) instances to do your data transfer. As we do not have any payment
 system, if you require larger instances please submit and instance, and we will work with you for the desired result.
 
