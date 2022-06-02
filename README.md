@@ -41,7 +41,7 @@ will answer promptly. Cheers
 Let's discuss the use case of OneDataShare and why you as a user would consider ODS compared to using 
 [RClone](https://github.com/rclone/rclone), [Globus](https://www.globus.org/), [Airavata](https://arxiv.org/pdf/2107.03882.pdf), [Go Anywhere](https://www.goanywhere.com/solutions/cloud-file-transfer) tool. 
 Consider the following image ![Tweet](images/CUBoulderTweet.png)
-Let's consider a few cases as to how one might move 2TB over different networks but all using a WAN or more generally some long fat network.
+Let's consider a few cases as to how one might move 2TB over different networks using a WAN or more generally some kind of long fat network.
 
 1. My personal ISP is Spectrum and currently I am purchasing a 400Mbps network, and I have an RTT of ~60ms with an MTU of 1500.
 
@@ -126,9 +126,9 @@ Deploying our entire ODS platform onto your site is not something I would advise
 open a ticket, and we will be in contact promptly.
 
 ## ODS Stack
-- Java 11
-- Python 3.9
-- Spring
+- [Java 11](https://openjdk.java.net/projects/jdk/11/)
+- [Python 3.0+](https://www.python.org/download/releases/3.0/)
+- [Spring](https://spring.io/)
 
 ### Spring
 - [Spring Batch](https://spring.io/projects/spring-batch)
@@ -139,8 +139,7 @@ open a ticket, and we will be in contact promptly.
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Reactive](https://spring.io/reactive)
 
-### Databases 
-- [Docopt](http://docopt.org/)
+### Databases
 - [DocumentDB](https://aws.amazon.com/documentdb/)
 - [CockroachDB](https://www.cockroachlabs.com/)
 - [Vault](https://www.hashicorp.com/products/vault)
