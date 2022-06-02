@@ -83,12 +83,12 @@ This section will explain the verbiage of the transfer options, and some recomme
   operation. If you come from a batch systems world then this would be called commit interval as well. The longer the
   distance between the source and destination the higher this value should be.
 - Retry: A fixed number of times to retry a chunk per file. So if this is set to 5, and a file has had 5 failures in
-  sending any chunk of the file. Then after 5 retries we will fail that step.
-- Overwrite: if the destination has the file with the same name/id in the same path then we will over write that file.
-- Encrypt: This value is currently meaning less, but if set to true we will then use SSL -> FTP, SFTP, HTTPS.
-- Compress: Currently this only supported for SFTP as the protocol supports this. ODS decides the compression level.
+  sending any chunk of the file. Then after 5 retries we will fail that fail and continue with the transfer.
+- Overwrite: If the destination has the file with the same name/id in the same path then we will over write that file.
+- Encrypt: This value is currently meaning less, but if set to true we will then use SSL -> FTPS, SFTP, HTTPS.
+- Compress: Currently this only supported for SFTP as this is native to the protocol. ODS decides the compression level.
 - Optimization: We are currently developing the Optimization side of the project, right now we plan to add two kinds:
-  RL, and Bayesian Optimization.
+  Reinforcement Learning, and Bayesian Optimization to tune the transfers in real time.
 
 Currently, ODS uses [t2.medium](https://aws.amazon.com/ec2/instance-types/)
 and [C4](https://aws.amazon.com/ec2/instance-types/) instances to do your data transfer. As we do not have any payment
