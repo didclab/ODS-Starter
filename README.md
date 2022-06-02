@@ -41,22 +41,25 @@ will answer promptly. Cheers
 Let's discuss the use case of OneDataShare and why you as a user would consider ODS compared to using 
 [RClone](https://github.com/rclone/rclone), [Globus](https://www.globus.org/), [Airavata](https://arxiv.org/pdf/2107.03882.pdf), [Go Anywhere](https://www.goanywhere.com/solutions/cloud-file-transfer) tool. 
 Consider the following image ![Tweet](images/CUBoulderTweet.png)
-Let's consider how I might handle moving ~2TB worth of data on my personal network. 
-Right now I have a 400Mbps network that I pay for provided by Spectrum. So we convert from bytes to bits which gives us 16Tb which means in the best conditions this would take
-~3.7 days assuming that I have a 400Mbps link dedicated to me to the fullest capacity, which we all know to not be true.
-In summary Spectrum or any other ISP would never actually provide the full dedicated link to you as maybe they change the way they route data due to some cost savings.
+Let's consider a few cases as to how one might move 2TB over different networks but all using a WAN or more generally some long fat network.
 
+1. My personal ISP is Spectrum and currently I am purchasing a 400Mbps network, and I have an RTT of ~60ms with an MTU of 1500.
 
-To saturate one's link is an open problem currently and users are not in the business of doing this themselves, they are focused on their own unique problems.
-If ODS did not exist I would most likely use RClone to transfer my data from Google Drive to OneDrive.
+In this case the minimum transfer time I can hope to accomplish is 11 hours and 42 seconds. Which is reasonable?
+   
+2. Every node in Chameleon Cloud has a 10Gbps defined through SDN, which then connects to a switch that has a 40Gbps link. With an RTT of ~50ms and a MTU of 1500.
+If we were to begin the transfer lets assume it is not possible to go past 10Gbps due to the SDN(in reality this is not true), this means we can hope to accomplish a minimum transfer time of 1 hour and 54 seconds.
+   
+
+If ODS did not exist I would most likely use RClone to transfer my data from Google Drive to OneDrive as my goal would be to get my data across as quickly as possible.
 The big issue is that RClone is static when it comes to observing your network it does an initial check and then uses those parameters for the rest of the transfer offering no dynamic tuning depending on the conditions of your network.
-Networks are highly volatile, and they are most importantly fair. This means that the maximum throughput you can hope to experience is constantly changing, and there is a long list of factors affecting your experience on the network.
+Networks are highly volatile, and they are most importantly fair. This means that there is a local maximum throughput changing constantly, and there is a long list of factors affecting your experience on networks like WAN's LFN's.
 OneDataShare has the sole goal of moving your data as fast as possible, while maintaining security standards and not storing any of your data in our system.
 If you would like to read more about the research behind ODS I have provided links below to relevant research papers.
 
-## Saas Users
+## SaaS Users
 
-[OneDataShare](https://onedatashare.org) for Saas users is very simple. A user can create a free account and add any of
+[OneDataShare](https://onedatashare.org) for SaaS users is very simple. A user can create a free account and add any of
 the supported protocols using the frontend. This will allow users to navigate and manage their filesystems through the
 OneDataShare UI. This approach is very supportive of users who do not wish to install anything on their system or are
 simply unable too. This is the simplest approach to using OneDataShare as there is nothing, but a UI. When the user has added at
@@ -123,6 +126,30 @@ Deploying our entire ODS platform onto your site is not something I would advise
 open a ticket, and we will be in contact promptly.
 
 ## ODS Stack
+- Java 11
+- Python 3.9
+- Spring
+
+### Spring
+- [Spring Batch](https://spring.io/projects/spring-batch)
+- [Spring Cloud](https://spring.io/projects/spring-cloud)
+- [Spring Data](https://spring.io/projects/spring-data)
+- [Spring Security](https://spring.io/projects/spring-security)
+- [Spring AMPQ](https://spring.io/projects/spring-amqp)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Reactive](https://spring.io/reactive)
+
+### Databases 
+- [Docopt](http://docopt.org/)
+- [DocumentDB](https://aws.amazon.com/documentdb/)
+- [CockroachDB](https://www.cockroachlabs.com/)
+- [Vault](https://www.hashicorp.com/products/vault)
 
 ## ODS Research Links
-
+- [Application-Level Optimization of Big Data Transfers through Pipelining, Parallelism and Concurrency](https://ieeexplore.ieee.org/abstract/document/7065237)
+- [High-Speed Transfer Optimization Based on Historical Analysis and Real-Time Tuning](https://ieeexplore.ieee.org/document/8249824)
+- [Big Data Transfer Optimization Through Adaptive Parameter Tuning](https://par.nsf.gov/servlets/purl/10074013)
+- [Prediction of Optimal Parallelism Level in Wide Area Data Transfers](https://ieeexplore.ieee.org/abstract/document/6018962)
+- [End-to-End Data-Flow Parallelism for Throughput Optimization in High-Speed Networks](https://link.springer.com/article/10.1007/s10723-012-9220-9)
+- [Dynamically tuning level of parallelism in wide area data transfers](https://dl.acm.org/doi/abs/10.1145/1383519.1383524)
+- [Energy-Efficient Data Transfer Optimization via Decision-Tree Based Uncertainty Reduction](https://arxiv.org/abs/2204.07601)
