@@ -12,15 +12,14 @@ will answer promptly. Cheers
 
 ## The OneDataShare Repositories
 
-1. [ODS CLI](https://github.com/didclab/ods-cli) <sub>(Release)</sub>
-2. [Pmeter](https://github.com/didclab/pmeter) <sub>(Release)</sub>
-3. [ODS Transfer Service](https://github.com/didclab/Transfer-Service) <sub>(Release)</sub>
-4. [ODS Transfer Scheduler](https://github.com/didclab/transfer-scheduler) <sub>(Release)</sub>
-5. [ODS MetaData](https://github.com/didclab/ods-metadata) <sub>(In Development)</sub>
-6. [Endpoint Credential](https://github.com/didclab/endpoint-cred-service) <sub>(Release and Private)</sub>
+1. [ODS CLI](https://github.com/didclab/ods-cli) <sub>(Release)</sub> a cli that interacts with the ODS monolith to provide a replacement to the UI
+2. [Pmeter](https://github.com/didclab/pmeter) <sub>(Release)</sub> an open source CLI tool developed to monitor the network, and kernel parameters of the host running the Transfer-Service
+3. [ODS Transfer Service](https://github.com/didclab/Transfer-Service) <sub>(Release)</sub> the actual data transfer service that utilizes threading to push your data.
+4. [ODS Transfer Scheduler](https://github.com/didclab/transfer-scheduler) <sub>(Release)</sub> a publisher to RabbitMQ that allows your Transfer-Job Requests to be queued.
+5. [ODS MetaData](https://github.com/didclab/ods-metadata) <sub>(In Development)</sub> a service that enables the querying of all the data transfers you have submitted as a user
+6. [Endpoint Credential](https://github.com/didclab/endpoint-cred-service) <sub>(Release and Private)</sub> the service that stores and manages endpoint credentials
 7. [C++ SDK](https://github.com/didclab/CClient) <sub>(Beta)</sub>
-8. [OneDataShare Monolith](https://github.com/didclab/onedatashare)
-9. [ODS Scheduler](https://github.com/didclab/transfer-scheduler)
+8. [OneDataShare Monolith](https://github.com/didclab/onedatashare) <sub>(Release)</sub> the core service running onedatashare.org
 
 ## Supported Protocols
 
@@ -29,7 +28,7 @@ will answer promptly. Cheers
 - [SFTP](https://datatracker.ietf.org/doc/html/rfc913) <sub>(Release)</sub>
 - [HTTP](https://datatracker.ietf.org/doc/html/rfc2616) <sub>(Release)</sub>
 - VFS stands for virtual file system and is only available to users who use the Hybrid or On-Premise deployment
-  model<sub>(Release)</sub>
+  model <sub>(Release)</sub>
 - [Box](https://www.box.com/) <sub>(Release)</sub>
 - [Dropbox](https://www.dropbox.com/) <sub>(Release)</sub>
 - [SCP](https://en.wikipedia.org/wiki/Secure_copy_protocol) <sub>(Release, SCP is deprecated as of April 2019 and uses SFTP by default)</sub>
@@ -140,9 +139,10 @@ open a ticket, and we will be in contact promptly.
 - [Spring Reactive](https://spring.io/reactive)
 
 ### Databases
-- [DocumentDB](https://aws.amazon.com/documentdb/)
-- [CockroachDB](https://www.cockroachlabs.com/)
-- [Vault](https://www.hashicorp.com/products/vault)
+- [DocumentDB](https://aws.amazon.com/documentdb/) stores your OneDataShare login credentials which provides default up to date security standards from Amazon.
+- [CockroachDB](https://www.cockroachlabs.com/) provides the ability to store metadata regarding your transfer, so we can restart any file that fails as well as optimize future transfers from your past transfer.
+- [Vault](https://www.hashicorp.com/products/vault) stores the endpoint credentials you add to OneDataShare.
+- [InfluxDB](https://www.influxdata.com/) an open source time series database that allows us to monitor active transfer-services
 
 ## ODS Research Links
 - [Application-Level Optimization of Big Data Transfers through Pipelining, Parallelism and Concurrency](https://ieeexplore.ieee.org/abstract/document/7065237)
