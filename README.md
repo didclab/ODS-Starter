@@ -104,7 +104,7 @@ This table represents what ODS currently supports, we are working on supporting 
 | FTP | &cross; | check max supported connections per user | &check; | &check; | &check; |&check; |&cross; |&cross; | &check; | &check; | &check; |
 | SFTP | &cross; | check max supported connections per user | &check; | > 5MB | &check; |&check; |&check; |&cross; | &check; | &check; | &check; |
 | HTTP | &check; | &check; | &check; | &check; | &check; |&check; |&cross; |&cross; | &cross; | &check; | &cross; |
-| Box | &check; | &check; | &check; | 20MB | &check; |&check; |&check; |&check; | &check; | &check; | &check; |
+| Box | &cross; | &check; | &check; | 20MB | &check; |&check; |&check; |&check; | &check; | &check; | &check; |
 | Dropbox | &check; | &check; | &check; | &check; | &check; |&check; |&cross; |&check; | &check; | &check; | &check; |
 | Google Drive | &cross; | &check; | &check; | &check; | &check; |&check; |&cross; |&cross; | &check; | &check; | &cross; |
 
