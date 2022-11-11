@@ -10,45 +10,19 @@ the protocols we support as well as the limitations & enhancements we apply per 
 If you have any feature requests, questions, or concerns please feel free to open an issue in this repository, and we
 will answer promptly. Cheers
 
-## The OneDataShare Repositories
-
-1. [ODS CLI](https://github.com/didclab/ods-cli) <sub>(Release)</sub> a cli that interacts with the ODS core to provide a replacement to the UI
-2. [Pmeter](https://github.com/didclab/pmeter) <sub>(Release)</sub> an open source CLI tool developed to monitor the network, and kernel parameters of the host running the Transfer-Service
-3. [ODS Transfer Service](https://github.com/didclab/Transfer-Service) <sub>(Release)</sub> the actual data transfer service that utilizes threading to push your data.
-4. [ODS Transfer Scheduler](https://github.com/didclab/transfer-scheduler) <sub>(Release)</sub> a publisher to RabbitMQ that allows your Transfer-Job Requests to be queued.
-5. [ODS MetaData](https://github.com/didclab/ods-metadata) <sub>(In Development)</sub> a service that enables the querying of all the data transfers you have submitted as a user
-6. [Endpoint Credential](https://github.com/didclab/endpoint-cred-service) <sub>(Release and Private)</sub> the service that stores and manages endpoint credentials
-7. [C++ SDK](https://github.com/didclab/CClient) <sub>(Beta)</sub>
-8. [OneDataShare Core](https://github.com/didclab/onedatashare) <sub>(Release)</sub> the core service running onedatashare.org
-
-## Supported Protocols
-
-- [S3](https://www.researchgate.net/publication/335608365_Amazon_S3) <sub>(Release)</sub>
-- [FTP](https://www.rfc-editor.org/info/rfc959) <sub>(Release)</sub>
-- [SFTP](https://datatracker.ietf.org/doc/html/rfc913) <sub>(Release)</sub>
-- [HTTP](https://datatracker.ietf.org/doc/html/rfc2616) <sub>(Release)</sub>
-- VFS stands for virtual file system and is only available to users who use the Hybrid or On-Premise deployment
-  model <sub>(Release)</sub>
-- [Box](https://www.box.com/) <sub>(Release)</sub>
-- [Dropbox](https://www.dropbox.com/) <sub>(Release)</sub>
-- [SCP](https://en.wikipedia.org/wiki/Secure_copy_protocol) <sub>(Release, SCP is deprecated as of April 2019 and uses SFTP by default)</sub>
-- [Google Drive](https://www.google.com/drive/) <sub>(Beta)</sub>
-
-
 ## Use Case
 
-Let's discuss the use case of OneDataShare and why users should activley consider ODS compared to projects such as: 
-[RClone](https://github.com/rclone/rclone), [Globus](https://www.globus.org/), [Airavata](https://arxiv.org/pdf/2107.03882.pdf), [Go Anywhere](https://www.goanywhere.com/solutions/cloud-file-transfer) tool. 
+Let's discuss the use case of OneDataShare and why users should activley consider ODS compared to projects such as:
+[RClone](https://github.com/rclone/rclone), [Globus](https://www.globus.org/), [Airavata](https://arxiv.org/pdf/2107.03882.pdf), [Go Anywhere](https://www.goanywhere.com/solutions/cloud-file-transfer) tool.
 Consider the following image ![Tweet](images/CUBoulderTweet.png)
 Let's consider a few cases as to how one might move 2TB over different networks using a WAN or more generally some kind of long fat network.
 
 1. My personal ISP is Spectrum and currently I am purchasing a 400Mbps network, and I have an RTT of ~60ms with an MTU of 1500.
 
 In this case the minimum transfer time I can hope to accomplish is 11 hours and 42 seconds. Which is reasonable?
-   
-2. Now lets consider what an HPC can bring to end users. Every node in Chameleon Cloud has a 10Gbps defined through SDN, which then connects to a switch that has a 40Gbps link. With an RTT of ~50ms and a MTU of 1500.
-If we were to begin the transfer lets assume it is not possible to go past 10Gbps due to the SDN(in reality this is not true), this means we can hope to accomplish a minimum transfer time of 1 hour and 54 seconds which is a massive increase in throughput but again it is still an unreasonable amount of time.
-   
+
+2. Now let's consider what an HPC can bring to end users. Every node in Chameleon Cloud has a 10Gbps defined through SDN, which then connects to a switch that has a 40Gbps link. With an RTT of ~50ms and a MTU of 1500.
+   If we were to begin the transfer lets assume it is not possible to go past 10Gbps due to the SDN(in reality this is not true), this means we can hope to accomplish a minimum transfer time of 1 hour and 54 seconds which is a massive increase in throughput but again it is still an unreasonable amount of time.
 
 If ODS did not exist I would most likely use RClone to transfer my data from Google Drive to OneDrive as my goal would be to get my data across as quickly as possible.
 The big issue is that RClone is static when it comes to observing your network it does an initial check and then uses those parameters for the rest of the transfer offering no dynamic tuning depending on the conditions of your network.
@@ -56,17 +30,43 @@ Networks are highly volatile, and they are most importantly fair. This means tha
 OneDataShare has the sole goal of moving your data as fast as possible, while maintaining security standards and not storing any of your data in our system.
 If you would like to read more about the research behind ODS I have provided links below to relevant research papers.
 
-## SaaS Users
+## The OneDataShare Repositories
 
-[OneDataShare](https://onedatashare.org) for SaaS users is very simple. A user can create a free account and add any of
-the supported protocols using the frontend. This will allow users to navigate and manage their filesystems through the
-OneDataShare UI. This approach is very supportive of users who do not wish to install anything on their system or are
-simply unable too. This is the simplest approach to using OneDataShare as there is nothing, but a UI. When the user has added at
-least 2 endpoints then the user may begin sending file transfers between the two endpoints. We currently do not support
-the scattering and gathering of files. If this is a feature you require please submit an issue with a clear description
-of how and why you would like this operation. In the bottom of the Transfer-Page the user is able to select some
-initial parameters to begin the transfer with. Now each protocol has limitation which will be covered below as these are
-hard restrictions.
+1. [OneDataShare UI](https://github.com/didclab/onedatashare) <sub>(Release)</sub> the core service running onedatashare.org
+2. [OneDataShare Scheduler](https://github.com/didclab/transfer-scheduler) <sub>(Release)</sub> a publisher to RabbitMQ that allows your Transfer-Job Requests to be queued.
+3. [OneDataShare Transfer Service](https://github.com/didclab/Transfer-Service) <sub>(Release)</sub> the actual data transfer service that utilizes threading to push your data.
+4. [OneDataShare Monitoring](https://github.com/didclab/ods-metadata) <sub>(In Development)</sub> a service that enables the querying of all the data transfers you have submitted as a user
+5. [OneDataShare Credential Service](https://github.com/didclab/endpoint-cred-service) <sub>(Release and Private)</sub> the service that stores and manages endpoint credentials
+6. [OneDataShare CLI](https://github.com/didclab/ods-cli) <sub>(Release)</sub> a cli that interacts with the ODS core to provide a replacement to the UI
+7. [C++ SDK](https://github.com/didclab/CClient) <sub>(Beta)</sub>
+8. [Pmeter](https://github.com/didclab/pmeter) <sub>(Release)</sub> an open source CLI tool developed to monitor the network, and kernel parameters of the host running the Transfer-Service
+
+## Supported Protocols
+
+- [Box](https://www.box.com/) <sub>(Release)</sub>
+- [Dropbox](https://www.dropbox.com/) <sub>(Release)</sub>
+- [FTP](https://www.rfc-editor.org/info/rfc959) <sub>(Release)</sub>
+- [Google Drive](https://www.google.com/drive/) <sub>(Beta)</sub>
+- [HTTP](https://datatracker.ietf.org/doc/html/rfc2616) <sub>(Release)</sub>
+- [SCP](https://en.wikipedia.org/wiki/Secure_copy_protocol) <sub>(Release, SCP is deprecated as of April 2019 and uses SFTP by default)</sub>
+- [SFTP](https://datatracker.ietf.org/doc/html/rfc913) <sub>(Release)</sub>
+- [S3](https://www.researchgate.net/publication/335608365_Amazon_S3) <sub>(Release)</sub>
+- VFS stands for virtual file system and is only available to users who use the Hybrid or On-Premise deployment
+  model <sub>(Release)</sub>
+
+## Protocol Limitations Table
+
+This table represents what ODS currently supports, we are working on supporting everything below.
+
+| Protocol | Parallelism | Concurrency | Pipelining | Chunk Size | Optimizer | Retry | Compress | Integrity | Overwrite | Read | Write |
+| -------- | ----------- | ----------- | ---------- | ---------- | --------- | ----- | -------- | --------- | --------- | ---- | ----- |
+| S3 | &check; | &check; | &check; | > 5MB | &check; |&check; |&check; |&cross; | &check; |&check; | &check; |
+| FTP | &cross; | check max supported connections per user | &check; | &check; | &check; |&check; |&cross; |&cross; | &check; | &check; | &check; |
+| SFTP | &cross; | check max supported connections per user | &check; | > 5MB | &check; |&check; |&check; |&cross; | &check; | &check; | &check; |
+| HTTP | &check; | &check; | &check; | &check; | &check; |&check; |&cross; |&cross; | &cross; | &check; | &cross; |
+| Box | &cross; | &check; | &check; | 20MB | &check; |&check; |&check; |&check; | &check; | &check; | &check; |
+| Dropbox | &check; | &check; | &check; | &check; | &check; |&check; |&cross; |&check; | &check; | &check; | &check; |
+| Google Drive | &cross; | &check; | &check; | &check; | &check; |&check; |&cross; |&cross; | &check; | &check; | &cross; |
 
 ## Transfer Options
 
@@ -90,23 +90,21 @@ This section will explain the verbiage of the transfer options, and some recomme
 - Optimization: We are currently developing the Optimization side of the project, right now we plan to add two kinds:
   Reinforcement Learning, and Bayesian Optimization to tune the transfers in real time.
 
+## SaaS Users
+
+[OneDataShare](https://onedatashare.org) for SaaS users is very simple. A user can create a free account and add any of
+the supported protocols using the frontend. This will allow users to navigate and manage their filesystems through the
+OneDataShare UI. This approach is very supportive of users who do not wish to install anything on their system or are
+simply unable too. This is the simplest approach to using OneDataShare as there is nothing, but a UI. When the user has added at
+least 2 endpoints then the user may begin sending file transfers between the two endpoints. We currently do not support
+the scattering and gathering of files. If this is a feature you require please submit an issue with a clear description
+of how and why you would like this operation. In the bottom of the Transfer-Page the user is able to select some
+initial parameters to begin the transfer with. Now each protocol has limitation which will be covered below as these are
+hard restrictions.
+
 Currently, ODS uses [t2.medium](https://aws.amazon.com/ec2/instance-types/)
 and [C4](https://aws.amazon.com/ec2/instance-types/) instances to do your data transfer. As we do not have any payment
 system, if you require larger instances please submit and instance, and we will work with you for the desired result.
-
-## Protocol Limitations Table
-
-This table represents what ODS currently supports, we are working on supporting everything below. 
-
-| Protocol | Parallelism | Concurrency | Pipelining | Chunk Size | Optimizer | Retry | Compress | Integrity | Overwrite | Read | Write |
-| -------- | ----------- | ----------- | ---------- | ---------- | --------- | ----- | -------- | --------- | --------- | ---- | ----- |
-| S3 | &check; | &check; | &check; | > 5MB | &check; |&check; |&check; |&cross; | &check; |&check; | &check; |
-| FTP | &cross; | check max supported connections per user | &check; | &check; | &check; |&check; |&cross; |&cross; | &check; | &check; | &check; |
-| SFTP | &cross; | check max supported connections per user | &check; | > 5MB | &check; |&check; |&check; |&cross; | &check; | &check; | &check; |
-| HTTP | &check; | &check; | &check; | &check; | &check; |&check; |&cross; |&cross; | &cross; | &check; | &cross; |
-| Box | &cross; | &check; | &check; | 20MB | &check; |&check; |&check; |&check; | &check; | &check; | &check; |
-| Dropbox | &check; | &check; | &check; | &check; | &check; |&check; |&cross; |&check; | &check; | &check; | &check; |
-| Google Drive | &cross; | &check; | &check; | &check; | &check; |&check; |&cross; |&cross; | &check; | &check; | &cross; |
 
 ## Hybrid Users
 
@@ -129,7 +127,7 @@ open a ticket, and we will be in contact promptly.
 - [Python 3.0+](https://www.python.org/download/releases/3.0/)
 - [Spring](https://spring.io/)
 
-### Spring
+### Spring Stack
 - [Spring Batch](https://spring.io/projects/spring-batch)
 - [Spring Cloud](https://spring.io/projects/spring-cloud)
 - [Spring Data](https://spring.io/projects/spring-data)
@@ -139,10 +137,10 @@ open a ticket, and we will be in contact promptly.
 - [Spring Reactive](https://spring.io/reactive)
 
 ### Databases
-- [DocumentDB](https://aws.amazon.com/documentdb/) stores your OneDataShare login credentials which provides default up to date security standards from Amazon.
+- [DocumentDB](https://aws.amazon.com/documentdb/) stores your OneDataShare login credentials which provides default up-to-date security standards from Amazon.
 - [CockroachDB](https://www.cockroachlabs.com/) provides the ability to store metadata regarding your transfer, so we can restart any file that fails as well as optimize future transfers from your past transfer.
-- [Vault](https://www.hashicorp.com/products/vault) stores the endpoint credentials you add to OneDataShare.
-- [InfluxDB](https://www.influxdata.com/) an open source time series database that allows us to monitor active transfer-services
+- [Vault](https://www.hashicorp.com/products/vault) stores the access credentials you add to OneDataShare for transferring to and from.
+- [InfluxDB](https://www.influxdata.com/) an open source time series database that allows us to monitor running transfer jobs that you have submitted.
 
 ## ODS Research Links
 - [Application-Level Optimization of Big Data Transfers through Pipelining, Parallelism and Concurrency](https://ieeexplore.ieee.org/abstract/document/7065237)
@@ -158,21 +156,21 @@ In this section of the document I would like to discuss how each service works, 
 If you wish to look at more specific things than I would advise looking at each repository independently and learning how ODS implemented it.
 In the case the reader wishes to understand how to deploy or interact with any specific service this information can and will be found under that repositories README.md.
 
-## ODS Core
+## ODS UI
 Back in 2019 when I first came to ODS the project was fully covered using this repository. It handled user management, credential management, data transfer specifics, and overall was the true definition of a core. 
 The project decided to migrate towards a micro-services architecture which meant that this service, was designated the task of handling all user related requests. 
 I find this to not be very interesting, nonetheless it is important to understand that this service is tasked with being the service that faces users, and handles: hosting frontend, providing access to all user related data. In the essence it is the service that all users interact with.
 
-## Endpoint Credential Service
+## OneDataShare Credential Service
 This service is a private repo, so you as a non-developer are not allowed at all to access the source code or understand the API of this service. The reason we did this is b/c we want to prevent any information from being exposed as to how we encrypt and store your information at rest.
 What I can tell you is that we use Vault, and DocumentDB to store all endpoint-credentials. Examples of such things are: pem files, basic auth, oauth tokens,,,, etc. The access to this service is strictly inter-service and the only time I can image a user wanting to access this service is when they are following the on-premise deployment which we still have not currently fleshed out entirely.
 Fundamentally this service is the only layer of access to your credentials, meaning no other service can access where your credentials are resting. A further layer of security is that only IP addresses from inside our VPC and not even all of those are allowed to access your credentials, we take the security of your credentials very seriously and if you have any recommendation on how we can improve or general questions please feel free to ask or comment, and we will answer promptly and transparently.
 
-## Transfer Scheduler
+## OneDataShare Scheduler
 The Transfer-Scheduler is only used when you are submitting transfer jobs. It is a publisher to RabbitMQ, and we do validation at this layer. We collect some metadata regarding your transfer request: find the file sizes, ensure those files exist, and expand the file paths, while adding a priority to your request. Currently, every user has the same priority as we have no differentiation between users.
 The idea of this service is to do validation checks on your request to make sure that it is possible before we publish the request.
 
-## Transfer Service
+## OneDataShare Transfer Service
 The Transfer Service is a consumer to RabbitMQ and does the data transfer.
 During the data transfer we send the statistics of the transfer service such as: memory usage, cpu usage/frequency, throughput,,, etc to InfluxDB for monitoring. In this way we are able to monitor transfers in real time.
 So how does Real time Transfer Optimization come into play? During the Transfer per interval we reach out to an optimizer submitting the throughput and corresponding transfer options, and we then receive the values to apply all in a non-blocking fashion. 
@@ -194,7 +192,7 @@ To re-state we have or are developing/testing two different kinds of optimizatio
  
 2. Reinforcement Learning: I will leave this blank as this is something DIDCLAB is actively researching.
 
-## Metadata Service
+## OneDataShare Monitoring Service
 This service is responsible for querying CockroachDB and exposes the meta data the ODS system has generated for current and past transfer jobs per user. 
 The metrics we store follow along these lines: start/end time per job, per file, read/write counts, skipped files, number of errors, the parameters of job, the step parameters,, etc. This meta data enables the system to retry automatically, and is largely provided by the Spring Batch Framework.
 This is not yet a finalized service, so I will end it here.
